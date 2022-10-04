@@ -1,0 +1,100 @@
+.node {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3rem;
+
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  &__controls {
+    display: flex;
+    margin-left: .5rem;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+
+    font-size: 1.125rem;
+    color: #2e465c;
+
+    > *:hover {
+      cursor: pointer;
+      color: lighten(#2e465c, 15);
+    }
+  }
+
+  * > .node {
+    padding-left: 3rem;
+  }
+
+  &.child-node {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: -900;
+      bottom: 0;
+      left: 1.5rem;
+      width: 0.125rem;
+      height: 100%;
+      background-color: #999;
+    }
+
+    &:last-child::before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -800;
+        top: 2.25rem;
+        left: 1.5rem;
+        width: 0.125rem;
+        height: 100%;
+        background-color: #fff;
+    }
+  }
+
+  &__title {
+    position: relative;
+    min-width: 4.75rem;
+    min-height: 2.25rem;
+    padding: 0.5rem 0.75rem;
+    color: white;
+    font-weight: bold;
+    background-color: #2e465c;
+    border-radius: 0.25rem;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: -1.5rem;
+      width: 1.5rem;
+      height: 0.125rem;
+      background-color: #999;
+    }
+  }
+}
+
+.root-node {
+  padding-bottom: 1rem;
+  padding-right: 3rem;
+  overflow: hidden;
+
+  & + .root-node {
+    margin-top: 2rem;
+  }
+
+  > .node__inner {
+    margin-top: 0;
+
+    .node__title::after {
+        display: none;
+    }
+  }
+}
