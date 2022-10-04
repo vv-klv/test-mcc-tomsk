@@ -12,7 +12,10 @@ function App() {
     const [nodes, setNodes] = useState(tree);
 
     const deleteRootNode = (id) => {
-        setNodes(nodes.filter(node => node.id !== id));
+        const filteredNodes = nodes.filter(node => node.id !== id);
+        filteredNodes.length === 0
+            ? alert('Нельзя удалять последнюю корневую ноду!')
+            : setNodes(nodes.filter(node => node.id !== id));
     }
 
     const resetHandler = () => {

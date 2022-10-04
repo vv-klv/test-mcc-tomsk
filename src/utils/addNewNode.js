@@ -1,4 +1,4 @@
-import generateID from '../../utils/generateID';
+import generateID from './generateID';
 
 const addNewNode = (pid) => {
     return {

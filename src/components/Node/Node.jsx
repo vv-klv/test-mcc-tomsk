@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 import { BsFolderPlus } from 'react-icons/bs';
-import addNewNode from './addNewNode';
+import addNewNode from '../../utils/addNewNode';
 import './Node.scss';
 
 
@@ -12,6 +12,7 @@ const Node = ({ name, children, pid, isRootNode, deleteRootNode, deleteNode }) =
 
     const ref = useRef(false);
     useEffect(() => {
+        // устранение перерендера
         if (ref.current) {
             setChildrenToRender(children);
             setNameToRender(name);
@@ -24,11 +25,7 @@ const Node = ({ name, children, pid, isRootNode, deleteRootNode, deleteNode }) =
     }
 
     const addNode = () => {
-        setChildrenToRender(prev =>
-            childrenToRender.length === 0
-                ? [addNewNode(pid)]
-                : [...prev, addNewNode(pid)]
-        );
+        setChildrenToRender(prev => [...prev, addNewNode(pid)]);
     }
 
     //? подумать, можно ли удалять rootNode
@@ -40,6 +37,7 @@ const Node = ({ name, children, pid, isRootNode, deleteRootNode, deleteNode }) =
 
     const handleRename = () => {
         const newName = prompt('Введите имя для ноды');
+        // недопущение ввода пустой строки
         newName.trim() === ''
             ? setNameToRender(prev => prev)
             : setNameToRender(newName);
@@ -50,9 +48,9 @@ const Node = ({ name, children, pid, isRootNode, deleteRootNode, deleteNode }) =
             <div className="node__inner">
                 <div className="node__title">{nameToRender}</div>
                 <span className="node__controls">
-                    <BsFolderPlus onClick={() => addNode()} />
+                    <BsFolderPlus onClick={addNode} />
                     <AiFillDelete onClick={() => handleDelete(pid)} />
-                    <MdDriveFileRenameOutline onClick={() => handleRename()} />
+                    <MdDriveFileRenameOutline onClick={handleRename} />
                 </span>
             </div>
             {
