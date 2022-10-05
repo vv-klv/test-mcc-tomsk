@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineClear } from 'react-icons/ai';
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 import { BsFolderPlus } from 'react-icons/bs';
 import addNewNode from '../../utils/addNewNode';
@@ -43,14 +43,20 @@ const Node = ({ name, children, pid, isRootNode, deleteRootNode, deleteNode }) =
             : setNameToRender(newName);
     }
 
+    const clearNode = () => {
+        setChildrenToRender([]);
+    }
+
     return (
         <div className={`node ${isRootNode ? 'root-node' : 'child-node'}`}>
             <div className="node__inner">
                 <div className="node__title">{nameToRender}</div>
                 <span className="node__controls">
-                    <BsFolderPlus onClick={addNode} />
-                    <AiFillDelete onClick={() => handleDelete(pid)} />
-                    <MdDriveFileRenameOutline onClick={handleRename} />
+                    <BsFolderPlus onClick={addNode} title='Add Node'/>
+                    {childrenToRender.length > 0 &&
+                        <AiOutlineClear onClick={clearNode} title='Clear Node' />}
+                    <AiFillDelete onClick={() => handleDelete(pid)} title='Delete Node' />
+                    <MdDriveFileRenameOutline onClick={handleRename} title='Rename Node' />
                 </span>
             </div>
             {
