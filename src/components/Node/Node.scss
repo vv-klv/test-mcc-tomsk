@@ -1,7 +1,13 @@
+@import "src/global";
+
 .node {
   display: flex;
   flex-direction: column;
   padding-left: 3rem;
+
+  * > .node {
+    padding-left: 3rem;
+  }
 
   &__inner {
     display: flex;
@@ -16,6 +22,28 @@
     }
   }
 
+  &__title {
+    position: relative;
+    min-width: 4.75rem;
+    min-height: 2.25rem;
+    padding: 0.5rem 0.75rem;
+    color: white;
+    font-weight: bold;
+    background-color: #2e465c;
+    border-radius: 0.25rem;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: -1.5rem;
+      width: 1.5rem;
+      height: 0.125rem;
+      background-color: #999;
+    }
+  }
+
   &__controls {
     display: flex;
     margin-left: .5rem;
@@ -23,7 +51,6 @@
     gap: 0.5rem;
     opacity: 0.5;
     transition: opacity 0.08s ease-in-out;
-
     font-size: 1.125rem;
     color: #2e465c;
 
@@ -31,10 +58,6 @@
       cursor: pointer;
       color: lighten(#2e465c, 15);
     }
-  }
-
-  * > .node {
-    padding-left: 3rem;
   }
 
   &.child-node {
@@ -63,28 +86,6 @@
         width: 0.125rem;
         height: 100%;
         background-color: #fff;
-    }
-  }
-
-  &__title {
-    position: relative;
-    min-width: 4.75rem;
-    min-height: 2.25rem;
-    padding: 0.5rem 0.75rem;
-    color: white;
-    font-weight: bold;
-    background-color: #2e465c;
-    border-radius: 0.25rem;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: -1.5rem;
-      width: 1.5rem;
-      height: 0.125rem;
-      background-color: #999;
     }
   }
 }
