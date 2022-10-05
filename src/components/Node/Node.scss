@@ -3,11 +3,19 @@
   flex-direction: column;
   padding-left: 3rem;
 
+
+
   &__inner {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: 1rem;
+
+    &:hover {
+      > .node__controls {
+        opacity: 1;
+      }
+    }
   }
 
   &__controls {
@@ -15,6 +23,8 @@
     margin-left: .5rem;
     padding: 0 0.5rem;
     gap: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.08s ease-in-out;
 
     font-size: 1.125rem;
     color: #2e465c;
